@@ -11,26 +11,29 @@ import { DataService } from "../data.service";
 export class LineChartComponent {
   objectKeys = Object.keys;
   cryptos: any;
+  time: any;
 
   constructor(private _data: DataService) {}
 
   ngOnInit() {
     setInterval(() => {
 
-      // this._data.getPrices().subscribe(
-      //   (res) => {
-      //   this.cryptos = res;
-      //   console.table("API cryptocurrency JSON data", this.cryptos.ETH.EUR);
-      // });
+      this._data.getPrices().subscribe(
+        (res) => {
+        this.cryptos = res;
+        console.table("API cryptocurrency JSON data", this.cryptos.ETH.EUR);
+      });
 
-      // this.lineChartData.forEach((x) => {
-      //   const num = this.cryptos.ETH.EUR;
-      //   const data: number[] = x.data as number[];
-      //   data.push(num);
-      // });
-      // this.lineChartLabels.push(`Label ${this.lineChartLabels.length}`);
+      this.lineChartData.forEach((x) => {
+        const num = this.cryptos.ETH.EUR;
+        const data: number[] = x.data as number[];
+        data.push(num);
+      });
+      this.time = new Date().toLocaleString("en-US", {hour: 'numeric',
+  minute: 'numeric', second: 'numeric'});
+      this.lineChartLabels.push(this.time);
 
-    }, 1000);
+    },  5000);
 
 
 
@@ -43,12 +46,7 @@ export class LineChartComponent {
 
 
   lineChartLabels: Label[] = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
+
   ];
 
   lineChartOptions = {
@@ -76,7 +74,7 @@ export class LineChartComponent {
       const data: number[] = x.data as number[];
       data.push(num);
     });
-    this.lineChartLabels.push(`Label ${this.lineChartLabels.length}`);
+    this.lineChartLabels.push(this.time);
   }
 
   public async getAmount() {
