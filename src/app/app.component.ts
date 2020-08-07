@@ -13,13 +13,14 @@ export class AppComponent {
   constructor(private _data: DataService) {}
 
   ngOnInit() {
-    setInterval(
-      () => {
+
+      (() => {
         this._data.getPrices().subscribe((res) => {
           this.cryptos = res;
-          console.table("API cryptocurrency JSON data", this.cryptos);
+          // console.table("API cryptocurrency JSON data", this.cryptos);
         });
-      }, 1000
-    )
+      }) ()
+
+
   }
 }

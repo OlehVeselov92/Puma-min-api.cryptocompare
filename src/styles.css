@@ -1,5 +1,6 @@
 body {
-  background: rgba(192, 237, 255, 0.904);
+  background: #fafafa;
+  /* color: #fff; */
   padding: 50px;
   font-family: 'Arial';
 }
