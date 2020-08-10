@@ -16,27 +16,34 @@ export class LineChartComponent {
   constructor(private _data: DataService) {}
 
   ngOnInit() {
+    this.getAmount();
+
+    this.time = new Date().toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric"
+    });
+
+    this.lineChartLabels.push(this.time);
+
+    setTimeout(() => {
+      this.pushOne();
+      // this.time = new Date().toLocaleString("en-US", {
+      //   hour: "numeric",
+      //   minute: "numeric",
+      //   second: "numeric",
+      // });
+      // this.lineChartLabels.push(this.time);
+    }, 1000);
+
     setInterval(() => {
-
-      this._data.getPrices().subscribe(
-        (res) => {
-        this.cryptos = res;
-        console.table("API cryptocurrency JSON data", this.cryptos.ETH.EUR);
+      this.getAmount();
+      this.pushOne();
+      this.time = new Date().toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric"
       });
-
-      this.lineChartData.forEach((x) => {
-        const num = this.cryptos.ETH.EUR;
-        const data: number[] = x.data as number[];
-        data.push(num);
-      });
-      this.time = new Date().toLocaleString("en-US", {hour: 'numeric',
-  minute: 'numeric', second: 'numeric'});
       this.lineChartLabels.push(this.time);
-
-    },  5000);
-
-
-
+    }, 60 * 1000);
   }
 
   // Chart params
@@ -44,10 +51,7 @@ export class LineChartComponent {
     { data: [], label: "Ethereum (ETH) rate to Euro (EUR)" },
   ];
 
-
-  lineChartLabels: Label[] = [
-
-  ];
+  lineChartLabels: Label[] = [];
 
   lineChartOptions = {
     responsive: true,
@@ -55,12 +59,12 @@ export class LineChartComponent {
 
   lineChartColors: Color[] = [
     {
-      backgroundColor: 'rgba(255,0,0,0.3)',
-      borderColor: 'red',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      backgroundColor: "rgba(255,0,0,0.3)",
+      borderColor: "red",
+      pointBackgroundColor: "rgba(148,159,177,1)",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "rgba(148,159,177,0.8)",
     },
   ];
 
@@ -68,7 +72,7 @@ export class LineChartComponent {
   lineChartPlugins = [];
   lineChartType = "line";
 
-   pushOne() {
+  pushOne() {
     this.lineChartData.forEach((x) => {
       const num = this.cryptos.ETH.EUR;
       const data: number[] = x.data as number[];
@@ -77,12 +81,10 @@ export class LineChartComponent {
     this.lineChartLabels.push(this.time);
   }
 
-  public async getAmount() {
-    this._data.getPrices().subscribe(
-      (res) => {
+  public getAmount() {
+    this._data.getPrices().subscribe((res) => {
       this.cryptos = res;
       console.table("API cryptocurrency JSON data", this.cryptos.ETH.EUR);
     });
-    this.pushOne();
   }
 }

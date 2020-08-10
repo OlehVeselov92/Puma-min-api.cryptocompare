@@ -15,11 +15,12 @@ export class AppComponent {
   ngOnInit() {
 
       (() => {
-        this._data.getPrices().subscribe((res) => {
+        this._data.getPrices().subscribe(
+          (res) => {
           this.cryptos = res;
           // console.table("API cryptocurrency JSON data", this.cryptos);
         });
-      }) ()
+      })();
 
 
   }
