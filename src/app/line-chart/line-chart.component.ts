@@ -18,32 +18,14 @@ export class LineChartComponent {
   ngOnInit() {
     this.getAmount();
 
-    this.time = new Date().toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric"
-    });
-
-    this.lineChartLabels.push(this.time);
-
     setTimeout(() => {
       this.pushOne();
-      // this.time = new Date().toLocaleString("en-US", {
-      //   hour: "numeric",
-      //   minute: "numeric",
-      //   second: "numeric",
-      // });
-      // this.lineChartLabels.push(this.time);
     }, 1000);
 
     setInterval(() => {
       this.getAmount();
       this.pushOne();
-      this.time = new Date().toLocaleString("en-US", {
-        hour: "numeric",
-        minute: "numeric"
-      });
-      this.lineChartLabels.push(this.time);
-    }, 60 * 1000);
+    },60 * 1000);
   }
 
   // Chart params
@@ -77,6 +59,11 @@ export class LineChartComponent {
       const num = this.cryptos.ETH.EUR;
       const data: number[] = x.data as number[];
       data.push(num);
+    });
+
+    this.time = new Date().toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric"
     });
     this.lineChartLabels.push(this.time);
   }
