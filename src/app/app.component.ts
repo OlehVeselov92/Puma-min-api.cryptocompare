@@ -18,7 +18,6 @@ export class AppComponent {
         this._data.getPrices().subscribe(
           (res) => {
           this.cryptos = res;
-          // console.table("API cryptocurrency JSON data", this.cryptos);
         });
       })();
 

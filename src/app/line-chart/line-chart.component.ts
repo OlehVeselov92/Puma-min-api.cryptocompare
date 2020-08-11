@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ChartDataSets, ChartOptions } from "chart.js";
+import { ChartDataSets } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { DataService } from "../data.service";
 
@@ -63,7 +63,7 @@ export class LineChartComponent {
 
     this.time = new Date().toLocaleString("en-US", {
       hour: "numeric",
-      minute: "numeric"
+      minute: "numeric",
     });
     this.lineChartLabels.push(this.time);
   }
@@ -71,7 +71,6 @@ export class LineChartComponent {
   public getAmount() {
     this._data.getPrices().subscribe((res) => {
       this.cryptos = res;
-      console.table("API cryptocurrency JSON data", this.cryptos.ETH.EUR);
     });
   }
 }
