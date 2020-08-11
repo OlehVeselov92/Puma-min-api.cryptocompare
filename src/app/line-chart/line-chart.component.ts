@@ -17,15 +17,33 @@ export class LineChartComponent {
 
   ngOnInit() {
     this.getAmount();
+    this.getHistoryCurrValue();
 
     setTimeout(() => {
-      this.pushOne();
-    }, 1000);
+
+      this.lineChartData[0] = {
+        data: this.cryptos.Data.Data.map((x) => x.close),
+        label: "Ethereum (ETH) rate to Euro (EUR)"
+      };
+
+      this.lineChartLabels = this.cryptos.Data.Data.map(
+        (x) => {
+          return new Date(x.time * 1000).toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+          })
+        }
+      )
+    }, 2000);
+
+
+
 
     setInterval(() => {
       this.getAmount();
       this.pushOne();
-    },60 * 1000);
+    }, 5000);
   }
 
   // Chart params
@@ -41,8 +59,8 @@ export class LineChartComponent {
 
   lineChartColors: Color[] = [
     {
-      backgroundColor: "rgba(255,0,0,0.3)",
-      borderColor: "red",
+      backgroundColor: "Light grey",
+      borderColor: "Light grey",
       pointBackgroundColor: "rgba(148,159,177,1)",
       pointBorderColor: "#fff",
       pointHoverBackgroundColor: "#fff",
@@ -73,4 +91,11 @@ export class LineChartComponent {
       this.cryptos = res;
     });
   }
+
+    getHistoryCurrValue() {
+    this._data.getHistory().subscribe((res) => {
+      this.cryptos = res;
+    });
+  }
+
 }

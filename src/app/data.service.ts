@@ -22,4 +22,14 @@ export class DataService {
       )
       .pipe(map((result) => (this.result = result)));
   }
+
+
+    getHistory() {
+    return this.http
+    .get(
+      "https://min-api.cryptocompare.com/data/v2/histominute?fsym=ETH&tsym=EUR&limit=10"
+    )
+    .pipe(map((result) => (this.result = result)));
+  }
+
 }
