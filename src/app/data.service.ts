@@ -10,10 +10,11 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  // function to get crypto prices from the API - no API key required.
+  // function to get crypto price from the API
+
   getPrices() {
     const fsymsList =
-      "ETH";
+      "ETH";  //Could be added several currencies
     return this.http
       .get(
         "https://min-api.cryptocompare.com/data/pricemulti?fsyms=" +
@@ -23,11 +24,11 @@ export class DataService {
       .pipe(map((result) => (this.result = result)));
   }
 
-
+// function to get crypto prices for last 10 minutes
     getHistory() {
     return this.http
     .get(
-      "https://min-api.cryptocompare.com/data/v2/histominute?fsym=ETH&tsym=EUR&limit=10"
+      "https://min-api.cryptocompare.com/data/v2/histominute?fsym=ETH&tsym=EUR&limit=10" //limit - number of minutes;
     )
     .pipe(map((result) => (this.result = result)));
   }

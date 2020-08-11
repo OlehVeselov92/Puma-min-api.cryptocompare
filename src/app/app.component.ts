@@ -14,13 +14,12 @@ export class AppComponent {
 
   ngOnInit() {
 
+// Function to display currency value:
       (() => {
         this._data.getPrices().subscribe(
           (res) => {
           this.cryptos = res;
         });
       })();
-
-
   }
 }

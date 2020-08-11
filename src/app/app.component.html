@@ -1,12 +1,11 @@
 <div *ngIf="cryptos">
   <h1 style="text-align: center;">CryptoCompare API Results</h1>
   <div id="crypto-container" *ngFor="let crypto of objectKeys(cryptos)">
+<!-- display Currency's code -->
     <span class="left">{{ crypto }}</span>
+    <!-- display Value -->
     <span class="right">{{ cryptos[crypto].EUR | currency: "EUR" }}</span>
   </div>
 </div>
-
 <app-line-chart></app-line-chart>
-
-
 
