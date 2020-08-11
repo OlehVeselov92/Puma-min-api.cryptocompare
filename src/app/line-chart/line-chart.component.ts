@@ -30,8 +30,8 @@ export class LineChartComponent {
         (x) => {
           return new Date(x.time * 1000).toLocaleString('en-US', {
             hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric'
+            minute: 'numeric'
+            
           })
         }
       )
@@ -43,7 +43,7 @@ export class LineChartComponent {
     setInterval(() => {
       this.getAmount();
       this.pushOne();
-    }, 5000);
+    },60 * 1000);
   }
 
   // Chart params
